@@ -1,0 +1,77 @@
+{
+  "template": "cozinha",
+  "description": "Cozinha residencial padrão com área de serviço integrada",
+  "nbr_minimums": {
+    "area_m2": 5.50,
+    "min_width_m": 1.80,
+    "pe_direito_m": 2.40
+  },
+  "suggested_dimensions": {
+    "width_m": 3.00,
+    "depth_m": 2.80,
+    "area_m2": 8.40
+  },
+  "walls": {
+    "thickness_m": 0.15,
+    "height_m": 2.80,
+    "material": "alvenaria",
+    "finish": "ceramica_ate_1.50m"
+  },
+  "openings": {
+    "door": {
+      "width_m": 0.80,
+      "height_m": 2.10,
+      "type": "simples"
+    },
+    "windows": [
+      {
+        "width_m": 1.20,
+        "height_m": 1.20,
+        "sill_m": 1.10,
+        "type": "maxim-ar",
+        "note": "Ventilação sobre a bancada/pia"
+      }
+    ]
+  },
+  "layout_options": {
+    "linear": {
+      "description": "Bancada em L ou linear — para cozinhas estreitas",
+      "min_width_m": 1.80,
+      "circulation_m": 1.20
+    },
+    "paralelo": {
+      "description": "Bancadas paralelas — corredor central",
+      "min_width_m": 2.40,
+      "circulation_m": 1.20
+    },
+    "U": {
+      "description": "Bancada em U — maior aproveitamento",
+      "min_width_m": 2.80,
+      "circulation_m": 1.20
+    }
+  },
+  "carpentry": {
+    "armarios_altos": {
+      "height_m": 2.10,
+      "depth_m": 0.35,
+      "material": "MDF 18mm",
+      "finish": "BP ou lacado"
+    },
+    "armarios_baixos": {
+      "height_m": 0.85,
+      "depth_m": 0.55,
+      "material": "MDF 18mm"
+    },
+    "bancada": {
+      "height_m": 0.90,
+      "depth_m": 0.60,
+      "material": "granito ou quartzo",
+      "note": "Pedra ou granito para área molhada"
+    }
+  },
+  "appliances": [
+    {"type": "fogao_4_bocas", "position": "bancada_central"},
+    {"type": "geladeira", "position": "canto_entrada"},
+    {"type": "pia_cozinha", "position": "frente_janela"}
+  ]
+}

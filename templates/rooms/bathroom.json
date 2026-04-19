@@ -1,0 +1,58 @@
+{
+  "template": "banheiro",
+  "description": "Banheiro social padrão NBR 15575 e NBR 9050",
+  "nbr_minimums": {
+    "area_m2": 3.50,
+    "min_width_m": 1.20,
+    "pe_direito_m": 2.20
+  },
+  "suggested_dimensions": {
+    "width_m": 1.80,
+    "depth_m": 2.20,
+    "area_m2": 3.96
+  },
+  "walls": {
+    "thickness_m": 0.15,
+    "height_m": 2.80,
+    "material": "alvenaria",
+    "finish": "ceramica_ate_teto"
+  },
+  "openings": {
+    "door": {
+      "width_m": 0.70,
+      "height_m": 2.10,
+      "type": "simples",
+      "note": "Porta abre para fora por segurança"
+    },
+    "windows": [
+      {
+        "width_m": 0.60,
+        "height_m": 0.60,
+        "sill_m": 1.80,
+        "type": "basculante",
+        "note": "Ventilação forçada ou janela alta"
+      }
+    ]
+  },
+  "fixtures": [
+    {
+      "type": "vaso_sanitario",
+      "position": "parede_fundo",
+      "clearance_front_m": 0.65,
+      "clearance_side_m": 0.15
+    },
+    {
+      "type": "pia_banheiro",
+      "position": "parede_lateral",
+      "height_m": 0.85
+    },
+    {
+      "type": "box_banheiro",
+      "position": "canto",
+      "size_m": "0.90x0.90"
+    }
+  ],
+  "accessibility": {
+    "note": "Para acessível: área mínima 4.0m², porta 0.90m, área giro 1.50m diâm."
+  }
+}

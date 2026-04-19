@@ -1,0 +1,43 @@
+{
+  "template": "quarto_casal",
+  "description": "Quarto de casal padrão NBR 15575",
+  "nbr_minimums": {
+    "area_m2": 9.00,
+    "min_width_m": 2.50,
+    "pe_direito_m": 2.40
+  },
+  "suggested_dimensions": {
+    "width_m": 3.50,
+    "depth_m": 3.00,
+    "area_m2": 10.50
+  },
+  "walls": {
+    "thickness_m": 0.15,
+    "height_m": 2.80,
+    "material": "alvenaria"
+  },
+  "openings": {
+    "door": {
+      "width_m": 0.90,
+      "height_m": 2.10,
+      "type": "simples"
+    },
+    "windows": [
+      {
+        "width_m": 1.20,
+        "height_m": 1.20,
+        "sill_m": 0.90,
+        "type": "correr"
+      }
+    ]
+  },
+  "furniture_layout": [
+    {"type": "cama_casal", "position": "centro_parede_fundo"},
+    {"type": "guarda_roupa_casal", "position": "parede_lateral"},
+    {"type": "criado_mudo", "position": "lateral_cama", "qty": 2}
+  ],
+  "illumination": {
+    "min_area_m2": 1.31,
+    "note": "12.5% da área do piso (NBR 15575)"
+  }
+}

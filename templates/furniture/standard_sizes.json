@@ -1,0 +1,67 @@
+{
+  "version": "1.0",
+  "unit": "metros",
+  "source": "NBR + medidas de mercado brasileiro",
+  "furniture": {
+    "dormitorio": {
+      "cama_solteiro":     {"w": 0.88, "d": 1.88, "h": 0.45},
+      "cama_casal":        {"w": 1.38, "d": 1.88, "h": 0.45},
+      "cama_queen":        {"w": 1.58, "d": 1.98, "h": 0.45},
+      "cama_king":         {"w": 1.93, "d": 2.03, "h": 0.45},
+      "guarda_roupa_2p":   {"w": 1.00, "d": 0.50, "h": 2.10},
+      "guarda_roupa_3p":   {"w": 1.50, "d": 0.50, "h": 2.10},
+      "guarda_roupa_4p":   {"w": 2.00, "d": 0.60, "h": 2.10},
+      "guarda_roupa_6p":   {"w": 2.72, "d": 0.60, "h": 2.10},
+      "criado_mudo":       {"w": 0.45, "d": 0.40, "h": 0.60},
+      "comoda":            {"w": 1.00, "d": 0.45, "h": 0.85},
+      "escrivaninha":      {"w": 1.20, "d": 0.60, "h": 0.75}
+    },
+    "sala": {
+      "sofa_1_lugar":      {"w": 0.80, "d": 0.85, "h": 0.85},
+      "sofa_2_lugares":    {"w": 1.50, "d": 0.85, "h": 0.85},
+      "sofa_3_lugares":    {"w": 2.10, "d": 0.85, "h": 0.85},
+      "sofa_canto":        {"w": 2.50, "d": 2.00, "h": 0.85},
+      "mesa_centro":       {"w": 1.20, "d": 0.60, "h": 0.40},
+      "rack":              {"w": 1.80, "d": 0.40, "h": 0.50},
+      "estante":           {"w": 0.80, "d": 0.30, "h": 1.80}
+    },
+    "jantar": {
+      "mesa_4_lugares":    {"w": 1.20, "d": 0.80, "h": 0.75},
+      "mesa_6_lugares":    {"w": 1.60, "d": 0.90, "h": 0.75},
+      "mesa_8_lugares":    {"w": 2.20, "d": 0.90, "h": 0.75},
+      "cadeira":           {"w": 0.45, "d": 0.50, "h": 0.85},
+      "aparador":          {"w": 1.20, "d": 0.40, "h": 0.85}
+    },
+    "escritorio": {
+      "mesa_escritorio":   {"w": 1.40, "d": 0.70, "h": 0.75},
+      "mesa_l":            {"w": 1.60, "d": 0.60, "h": 0.75},
+      "cadeira_escritorio": {"w": 0.60, "d": 0.60, "h": 1.20},
+      "estante_escritorio": {"w": 0.80, "d": 0.30, "h": 2.00},
+      "gaveteiro":         {"w": 0.40, "d": 0.50, "h": 0.70}
+    },
+    "cozinha": {
+      "armario_alto":      {"w": 0.60, "d": 0.35, "h": 2.10},
+      "armario_baixo":     {"w": 0.60, "d": 0.55, "h": 0.85},
+      "bancada":           {"w": 0.60, "d": 0.60, "h": 0.90},
+      "fogao_4_bocas":     {"w": 0.56, "d": 0.56, "h": 0.85},
+      "fogao_6_bocas":     {"w": 0.76, "d": 0.59, "h": 0.85},
+      "geladeira_duplex":  {"w": 0.70, "d": 0.80, "h": 1.80},
+      "micro_ondas":       {"w": 0.50, "d": 0.35, "h": 0.30},
+      "lava_loucas":       {"w": 0.60, "d": 0.60, "h": 0.85}
+    },
+    "banheiro": {
+      "vaso_sanitario":    {"w": 0.37, "d": 0.65, "h": 0.80},
+      "pia_banheiro":      {"w": 0.50, "d": 0.45, "h": 0.85},
+      "coluna_pia":        {"w": 0.35, "d": 0.35, "h": 0.82},
+      "box_quadrado":      {"w": 0.90, "d": 0.90, "h": 2.00},
+      "box_retangular":    {"w": 1.20, "d": 0.80, "h": 2.00},
+      "banheira_simples":  {"w": 0.75, "d": 1.50, "h": 0.50},
+      "banheira_grande":   {"w": 0.80, "d": 1.70, "h": 0.55}
+    },
+    "area_servico": {
+      "tanque":            {"w": 0.60, "d": 0.55, "h": 0.85},
+      "maquina_lavar":     {"w": 0.60, "d": 0.65, "h": 0.85},
+      "secadora":          {"w": 0.60, "d": 0.65, "h": 0.85}
+    }
+  }
+}

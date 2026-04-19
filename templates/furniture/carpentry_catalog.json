@@ -1,0 +1,145 @@
+{
+  "version": "1.0",
+  "description": "Catálogo de madeiras e painéis para carpintaria residencial — mercado brasileiro",
+  "woods": {
+    "solidas": {
+      "pinus": {
+        "nome": "Pinus (Pinus elliottii)",
+        "preco_ref": "economico",
+        "densidade_kg_m3": 530,
+        "dureza_janka_kgf": 460,
+        "cor": "amarelo claro a branco",
+        "ambientes": ["interno"],
+        "usos": ["estrutura leve", "móveis", "forro", "caixilhos"],
+        "tratamento_recomendado": "autoclave CCA ou CCB para externo",
+        "obs": "Madeira de reflorestamento. Boa trabalhabilidade. Aceita bem verniz e tinta."
+      },
+      "eucalipto": {
+        "nome": "Eucalipto (Eucalyptus spp.)",
+        "preco_ref": "economico",
+        "densidade_kg_m3": 700,
+        "dureza_janka_kgf": 800,
+        "cor": "bege a castanho",
+        "ambientes": ["interno", "externo com tratamento"],
+        "usos": ["estrutural", "deck", "caibros", "ripas"],
+        "tratamento_recomendado": "autoclave ou oleação para externo",
+        "obs": "Alta disponibilidade no Brasil. Pode rachar se não curado corretamente."
+      },
+      "cedro_rosa": {
+        "nome": "Cedro Rosa (Cedrela fissilis)",
+        "preco_ref": "medio",
+        "densidade_kg_m3": 500,
+        "dureza_janka_kgf": 430,
+        "cor": "rosa avermelhado",
+        "ambientes": ["interno", "umido"],
+        "usos": ["móveis finos", "esquadrias", "revestimento"],
+        "obs": "Aromático, resistente a insetos. Excelente para armários e roupeiros."
+      },
+      "ipe": {
+        "nome": "Ipê (Handroanthus spp.)",
+        "preco_ref": "premium",
+        "densidade_kg_m3": 1050,
+        "dureza_janka_kgf": 3680,
+        "cor": "marrom amarelado",
+        "ambientes": ["interno", "externo", "umido"],
+        "usos": ["deck", "estrutural", "pergolado", "assoalho"],
+        "obs": "Alta durabilidade natural classe 1. Requer serras específicas."
+      },
+      "cumaru": {
+        "nome": "Cumaru (Dipteryx odorata)",
+        "preco_ref": "premium",
+        "densidade_kg_m3": 1000,
+        "dureza_janka_kgf": 3540,
+        "cor": "marrom claro a avermelhado",
+        "ambientes": ["interno", "externo", "umido"],
+        "usos": ["deck", "assoalho", "estrutural"],
+        "obs": "Alternativa ao ipê. Cheiro característico de baunilha."
+      },
+      "angelim_pedra": {
+        "nome": "Angelim Pedra (Hymenolobium petraeum)",
+        "preco_ref": "medio",
+        "densidade_kg_m3": 830,
+        "dureza_janka_kgf": 1530,
+        "cor": "marrom rosado",
+        "ambientes": ["interno", "externo"],
+        "usos": ["estrutural", "vigas", "caibros", "deck"],
+        "obs": "Boa relação custo-benefício para estruturas."
+      }
+    },
+    "paineis": {
+      "MDF": {
+        "nome": "MDF (Medium Density Fiberboard)",
+        "preco_ref": "economico",
+        "densidade_kg_m3": 750,
+        "espessuras_mm": [3, 6, 9, 12, 15, 18, 25],
+        "dimensao_chapa": "2750x1850mm",
+        "ambientes": ["interno"],
+        "usos": ["móveis planejados", "armários", "frentes de gaveta"],
+        "obs": "Superfície lisa, aceita pintura e laminado. Sensível à umidade."
+      },
+      "MDF_RU": {
+        "nome": "MDF Resistente à Umidade",
+        "preco_ref": "medio",
+        "densidade_kg_m3": 760,
+        "espessuras_mm": [15, 18, 25],
+        "dimensao_chapa": "2750x1850mm",
+        "ambientes": ["interno", "umido"],
+        "usos": ["cozinha", "banheiro", "área de serviço"],
+        "cor_referencia": "verde (colorido na massa)"
+      },
+      "MDP": {
+        "nome": "MDP (Medium Density Particleboard)",
+        "preco_ref": "economico",
+        "densidade_kg_m3": 680,
+        "espessuras_mm": [15, 18, 25],
+        "dimensao_chapa": "2750x1850mm",
+        "ambientes": ["interno"],
+        "usos": ["partes internas de armários", "prateleiras"],
+        "obs": "Mais leve que MDF. Bordas requerem fita ou bordo."
+      },
+      "compensado": {
+        "nome": "Compensado Naval/Pinus",
+        "preco_ref": "medio",
+        "densidade_kg_m3": 600,
+        "espessuras_mm": [4, 6, 10, 12, 15, 18],
+        "dimensao_chapa": "2200x1600mm",
+        "ambientes": ["interno", "umido com tratamento"],
+        "usos": ["estrutura móvel", "fundo de armário", "formas"],
+        "obs": "Boa resistência mecânica. Bordas precisam de acabamento."
+      },
+      "OSB": {
+        "nome": "OSB (Oriented Strand Board)",
+        "preco_ref": "economico",
+        "densidade_kg_m3": 620,
+        "espessuras_mm": [9, 11, 15, 18],
+        "dimensao_chapa": "2440x1220mm",
+        "ambientes": ["interno", "externo com tratamento"],
+        "usos": ["fechamento", "estrutura wall frame", "piso"],
+        "obs": "Aspecto rústico, usado em construção seca (steel/wood frame)."
+      }
+    }
+  },
+  "encaixes": {
+    "cavilha": {
+      "desc": "Pino redondo de madeira ou plástico. Uniões simples.",
+      "diametros_mm": [6, 8, 10]
+    },
+    "rabo_de_andorinha": {
+      "desc": "Encaixe trapezoidal de alta resistência ao tração. Gavetas e caixas.",
+      "angulo_graus": 9
+    },
+    "espiga_e_mortise": {
+      "desc": "Encaixe clássico de marcenaria. Estruturas de mesas e cadeiras."
+    },
+    "lamelo": {
+      "desc": "Biscoito de madeira prensada. União rápida com boa resistência lateral."
+    },
+    "confirmat": {
+      "desc": "Parafuso especial para painéis MDF/MDP. União de canto 90°.",
+      "tamanhos_mm": ["5x50", "7x50", "7x70"]
+    },
+    "minifix": {
+      "desc": "Sistema excêntrico. União desmontável para painéis."
+    }
+  }
+}
