@@ -59,12 +59,16 @@ def _list_walls(doc) -> None:
 
 
 WINDOW_PRESETS = {
-    "correr": "Sliding door",
+    "correr": "Open 2-pane",
     "maxim-ar": "Open 2-pane",
     "guilhotina": "Sash window 2-pane",
     "basculante": "Open 1-pane",
     "fixa": "Fixed",
 }
+
+# Presets garantidos em todas as versões do FreeCAD Arch
+_SAFE_PRESETS = {"Fixed", "Open 1-pane", "Open 2-pane",
+                 "Sash window 2-pane", "Sash window 4-pane", "Simple door", "Glass door"}
 
 
 def illumination_check(room_area: float, window_area: float) -> dict:
@@ -137,7 +141,13 @@ def add_window(
 
     FreeCAD.Console.PrintMessage(f"Parede encontrada: Name={wall.Name!r}  Label={wall.Label!r}\n")
 
-    preset_name = WINDOW_PRESETS.get(window_type, "Sliding door")
+    preset_name = WINDOW_PRESETS.get(window_type, "Open 2-pane")
+    if preset_name not in _SAFE_PRESETS:
+        FreeCAD.Console.PrintWarning(
+            f"Preset '{preset_name}' pode não existir nesta versão do FreeCAD. "
+            f"Usando 'Open 2-pane'.\n"
+        )
+        preset_name = "Open 2-pane"
 
     window = Arch.makeWindowPreset(
         preset_name,
@@ -152,6 +162,14 @@ def add_window(
         o2=mm(0.05),
         placement=_wall_placement(wall, position_x, sill_height),
     )
+
+    if window is None:
+        FreeCAD.Console.PrintError(
+            f"Falha ao criar janela com preset '{preset_name}'. "
+            f"Presets disponíveis: {sorted(_SAFE_PRESETS)}\n"
+        )
+        return None
+
     window.Label = label
     window.Hosts = [wall]
 
