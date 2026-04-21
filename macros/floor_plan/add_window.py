@@ -3,6 +3,12 @@ Macro FreeCAD: Adicionar Janela
 
 Insere uma janela em uma parede existente no documento ativo.
 Execute dentro do FreeCAD: Macro → Executar Macro → add_window.py
+
+COMO USAR:
+  1. Execute create_room.py primeiro para criar as paredes.
+  2. No Report View (Menu Ver → Painéis → Saída do relatório) anote o Label
+     da parede onde quer inserir a janela (ex: "Sala de Estar_Parede_Norte").
+  3. Cole esse Label em WALL_LABEL abaixo e execute esta macro.
 """
 
 import FreeCAD
@@ -10,7 +16,9 @@ import Arch
 import Draft
 
 # ── Configurações ──────────────────────────────────────────────────────────────
-WALL_LABEL = "Parede_01"
+# Coloque aqui o Label EXATO da parede (veja o Report View após create_room.py)
+# Exemplos: "Sala de Estar_Parede_Norte" | "Quarto_Parede_Leste" | "Wall002"
+WALL_LABEL = "Sala de Estar_Parede_Norte"
 POSITION_X = 1.20      # metros a partir do início da parede
 WIDTH = 1.20            # metros
 HEIGHT = 1.20           # metros
@@ -19,6 +27,37 @@ WINDOW_TYPE = "correr"  # maxim-ar | correr | guilhotina | basculante | fixa
 WINDOW_LABEL = "Janela_01"
 # ──────────────────────────────────────────────────────────────────────────────
 
+def mm(v: float) -> float:
+    return v * 1000
+
+
+def _find_wall(doc, identifier: str):
+    """Busca parede por Label exato, Name exato ou Label parcial (case-insensitive)."""
+    walls = [o for o in doc.Objects if hasattr(o, "Width") and hasattr(o, "Height")]
+
+    for w in walls:
+        if w.Label == identifier:
+            return w
+    for w in walls:
+        if w.Name == identifier:
+            return w
+    identifier_lower = identifier.lower()
+    for w in walls:
+        if identifier_lower in w.Label.lower():
+            return w
+    return None
+
+
+def _list_walls(doc) -> None:
+    walls = [o for o in doc.Objects if hasattr(o, "Width") and hasattr(o, "Height")]
+    if not walls:
+        FreeCAD.Console.PrintError("Nenhuma parede encontrada no documento.\n")
+        return
+    FreeCAD.Console.PrintMessage("Paredes disponíveis no documento:\n")
+    for w in walls:
+        FreeCAD.Console.PrintMessage(f"  Name={w.Name!r:12s}  Label={w.Label!r}\n")
+
+
 WINDOW_PRESETS = {
     "correr": "Sliding door",
     "maxim-ar": "Open 2-pane",
@@ -26,10 +65,6 @@ WINDOW_PRESETS = {
     "basculante": "Open 1-pane",
     "fixa": "Fixed",
 }
-
-
-def mm(v: float) -> float:
-    return v * 1000
 
 
 def illumination_check(room_area: float, window_area: float) -> dict:
@@ -56,15 +91,18 @@ def add_window(
         FreeCAD.Console.PrintError("Nenhum documento ativo.\n")
         return None
 
-    wall = None
-    for obj in doc.Objects:
-        if obj.Label == wall_label and hasattr(obj, "Width"):
-            wall = obj
-            break
+    wall = _find_wall(doc, wall_label)
 
     if wall is None:
-        FreeCAD.Console.PrintError(f"Parede '{wall_label}' não encontrada.\n")
+        FreeCAD.Console.PrintError(
+            f"Parede '{wall_label}' não encontrada.\n"
+            f"Dica: o Label é definido no create_room.py como "
+            f"'<NomeCômodo>_Parede_<Sul|Norte|Leste|Oeste>'.\n"
+        )
+        _list_walls(doc)
         return None
+
+    FreeCAD.Console.PrintMessage(f"Parede encontrada: Name={wall.Name!r}  Label={wall.Label!r}\n")
 
     preset_name = WINDOW_PRESETS.get(window_type, "Sliding door")
 
