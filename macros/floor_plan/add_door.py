@@ -3,6 +3,12 @@ Macro FreeCAD: Adicionar Porta
 
 Insere uma porta em uma parede existente no documento ativo.
 Execute dentro do FreeCAD: Macro → Executar Macro → add_door.py
+
+COMO USAR:
+  1. Execute create_room.py primeiro para criar as paredes.
+  2. No Report View (Menu Ver → Painéis → Saída do relatório) anote o Label
+     da parede onde quer inserir a porta (ex: "Sala de Estar_Parede_Sul").
+  3. Cole esse Label em WALL_LABEL abaixo e execute esta macro.
 """
 
 import FreeCAD
@@ -10,7 +16,9 @@ import Arch
 import Draft
 
 # ── Configurações ──────────────────────────────────────────────────────────────
-WALL_LABEL = "Parede_01"     # Label da parede alvo
+# Coloque aqui o Label EXATO da parede (veja o Report View após create_room.py)
+# Exemplos: "Sala de Estar_Parede_Sul" | "Quarto_Parede_Oeste" | "Wall001"
+WALL_LABEL = "Sala de Estar_Parede_Sul"
 POSITION_X = 1.0             # metros a partir do início da parede
 WIDTH = 0.90                 # metros
 HEIGHT = 2.10                # metros
@@ -34,6 +42,40 @@ def mm(v: float) -> float:
     return v * 1000
 
 
+def _find_wall(doc, identifier: str):
+    """Busca parede por Label exato, Name exato ou Label parcial (case-insensitive)."""
+    walls = [o for o in doc.Objects if hasattr(o, "Width") and hasattr(o, "Height")]
+
+    # 1. Label exato
+    for w in walls:
+        if w.Label == identifier:
+            return w
+
+    # 2. Name interno exato (ex: "Wall001")
+    for w in walls:
+        if w.Name == identifier:
+            return w
+
+    # 3. Label parcial case-insensitive
+    identifier_lower = identifier.lower()
+    for w in walls:
+        if identifier_lower in w.Label.lower():
+            return w
+
+    return None
+
+
+def _list_walls(doc) -> None:
+    """Imprime todas as paredes disponíveis no documento."""
+    walls = [o for o in doc.Objects if hasattr(o, "Width") and hasattr(o, "Height")]
+    if not walls:
+        FreeCAD.Console.PrintError("Nenhuma parede encontrada no documento.\n")
+        return
+    FreeCAD.Console.PrintMessage("Paredes disponíveis no documento:\n")
+    for w in walls:
+        FreeCAD.Console.PrintMessage(f"  Name={w.Name!r:12s}  Label={w.Label!r}\n")
+
+
 def add_door(
     wall_label: str,
     position_x: float,
@@ -49,16 +91,18 @@ def add_door(
         FreeCAD.Console.PrintError("Nenhum documento ativo.\n")
         return None
 
-    # Localiza a parede pelo label
-    wall = None
-    for obj in doc.Objects:
-        if obj.Label == wall_label and hasattr(obj, "Width"):
-            wall = obj
-            break
+    wall = _find_wall(doc, wall_label)
 
     if wall is None:
-        FreeCAD.Console.PrintError(f"Parede '{wall_label}' não encontrada.\n")
+        FreeCAD.Console.PrintError(
+            f"Parede '{wall_label}' não encontrada.\n"
+            f"Dica: o Label é definido no create_room.py como "
+            f"'<NomeCômodo>_Parede_<Sul|Norte|Leste|Oeste>'.\n"
+        )
+        _list_walls(doc)
         return None
+
+    FreeCAD.Console.PrintMessage(f"Parede encontrada: Name={wall.Name!r}  Label={wall.Label!r}\n")
 
     # Cria uma janela/porta com preset do Arch
     door = Arch.makeWindowPreset(
