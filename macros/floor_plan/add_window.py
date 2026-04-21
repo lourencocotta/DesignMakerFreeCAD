@@ -77,6 +77,39 @@ def illumination_check(room_area: float, window_area: float) -> dict:
     }
 
 
+def _wall_placement(wall, position_x: float, sill: float) -> "FreeCAD.Placement":
+    """Calcula placement para porta/janela na face da parede."""
+    import math
+
+    base = getattr(wall, "Base", None)
+    if base is None or not hasattr(base, "Shape") or len(base.Shape.Vertexes) < 2:
+        return FreeCAD.Placement(
+            FreeCAD.Vector(mm(position_x), 0, mm(sill)),
+            FreeCAD.Rotation(),
+        )
+
+    start = base.Shape.Vertexes[0].Point
+    end   = base.Shape.Vertexes[-1].Point
+
+    dx, dy = end.x - start.x, end.y - start.y
+    length = math.sqrt(dx * dx + dy * dy)
+    if length < 1e-6:
+        return FreeCAD.Placement(
+            FreeCAD.Vector(mm(position_x), 0, mm(sill)),
+            FreeCAD.Rotation(),
+        )
+
+    ux, uy = dx / length, dy / length
+    pos = FreeCAD.Vector(
+        start.x + ux * mm(position_x),
+        start.y + uy * mm(position_x),
+        mm(sill),
+    )
+    angle = math.degrees(math.atan2(dy, dx))
+    rot = FreeCAD.Rotation(FreeCAD.Vector(0, 0, 1), angle)
+    return FreeCAD.Placement(pos, rot)
+
+
 def add_window(
     wall_label: str,
     position_x: float,
@@ -117,10 +150,7 @@ def add_window(
         w2=mm(0.05),
         o1=0,
         o2=mm(0.05),
-        placement=FreeCAD.Placement(
-            FreeCAD.Vector(mm(position_x), 0, mm(sill_height)),
-            FreeCAD.Rotation(),
-        ),
+        placement=_wall_placement(wall, position_x, sill_height),
     )
     window.Label = label
     window.Hosts = [wall]
