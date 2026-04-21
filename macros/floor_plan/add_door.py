@@ -109,9 +109,13 @@ def _wall_placement(wall, position_x: float, sill: float) -> "FreeCAD.Placement"
         mm(sill),
     )
 
-    # Rotação: alinha a porta com a direção da parede (ângulo em torno de Z)
+    # makeWindowPreset cria o elemento deitado no plano XY.
+    # 1) Ergue 90° em torno de X → elemento fica vertical, face apontando Y+
+    # 2) Gira em torno de Z pelo ângulo da parede → alinha com a direção da parede
+    rot_upright = FreeCAD.Rotation(FreeCAD.Vector(1, 0, 0), 90)
     angle = math.degrees(math.atan2(dy, dx))
-    rot = FreeCAD.Rotation(FreeCAD.Vector(0, 0, 1), angle)
+    rot_align = FreeCAD.Rotation(FreeCAD.Vector(0, 0, 1), angle)
+    rot = rot_align.multiply(rot_upright)
 
     return FreeCAD.Placement(pos, rot)
 

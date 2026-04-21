@@ -109,8 +109,10 @@ def _wall_placement(wall, position_x: float, sill: float) -> "FreeCAD.Placement"
         start.y + uy * mm(position_x),
         mm(sill),
     )
+    rot_upright = FreeCAD.Rotation(FreeCAD.Vector(1, 0, 0), 90)
     angle = math.degrees(math.atan2(dy, dx))
-    rot = FreeCAD.Rotation(FreeCAD.Vector(0, 0, 1), angle)
+    rot_align = FreeCAD.Rotation(FreeCAD.Vector(0, 0, 1), angle)
+    rot = rot_align.multiply(rot_upright)
     return FreeCAD.Placement(pos, rot)
 
 
